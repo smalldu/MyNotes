@@ -1,4 +1,4 @@
-# UIView
+# UIView - 01
 
 view 指 `UIView` 以及他的子类，他可以将自己绘制在一个矩形内，我们可以很轻松的操作它的大小、变换、隐藏显示等。
 view 也是一个响应者（因为它继承自`UIResponder`），所以view 为我们提供了很多用户交互方式，如点击、滑动、双击、长按等。还有一些touches方法。
@@ -141,31 +141,159 @@ if the view is fully or partially transparent.
 
 ### Frame
 
+View 的 frame属性(CGRect类) 是它本身的长方形在 superview 中的位置，注意是在 superview 的坐标系中的位置。默认来说，superview 的坐标系原点在左上，向右 x 增加，向下 y 增加
+
+看一个frame使用的简单的例子：
+
+```swift
+let mainview = self.view
+let v1 = UIView(frame:CGRectMake(113, 111, 132, 194))
+v1.backgroundColor = UIColor(red: 1, green: 0.4, blue: 1, alpha: 1)
+let v2 = UIView(frame:CGRectMake(41, 56, 132, 194))
+v2.backgroundColor = UIColor(red: 0.5, green: 1, blue: 0, alpha: 1)
+let v3 = UIView(frame:CGRectMake(43, 197, 160, 230))
+v3.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
+mainview.addSubview(v1)
+v1.addSubview(v2)
+mainview.addSubview(v3)
+```
+***
+
+### Bounds and Center
+
+`frame` 是一个view在它superview的坐标系的位置， `bounds`对应的是view在自己的坐标系下的位置和尺寸
+
+`bounds` 的 `size` 会影响其 `frame` 的 `size` ，改变 `frame` 的 `size` 会影响其 bounds 的 `size` 。只有 view 的 `center` 不会影响 `bounds` 的 `size` 。 这个属性代表了 subview 在 superview 中的 `position` 。
+
+获取 view center的方法 
+
+```swift
+let c = CGPointMake(view1.bounds.midX + view1.frame.origin.x ,view1.bounds.midY + view1.frame.origin.y)
+```
+
+view的bounds和center互不影响，相互独立的。frame是center和bounds便捷的表达。大多数情况我们只需要使用frame就可以了。一般会通过init(frame:) 来创建一个view。注意有些情况下 frame 会没有什么意义，但是 bounds 和 center 总是有效的，所以建议多用 bounds 和 center 的组合，也比较容易理解。
+
+- bounds: 一个 view 自己的坐标系统
+- center: 一个 view 的坐标系统和其 superview 的坐标系统的关系
+
+![center](http://oyl1dq3ij.bkt.clouddn.com/center.png)
+
+可以用如下方法来进行不同 view 之间的坐标转换:
+
+- `convertPoint:fromView:`, `convertPoint:toView:`
+- `convertRect:fromView:`, `convertRect:toView:`
+
+如果第二个参数是nil，系统自动填补为 `window`
+
+>注意，通过改变 center 来设置 view 的位置时，如果高或宽不是偶数，那么可能会导致 misaligned(错位)。可以通过打开模拟器的 Debug -> Color Misaligned Images 来进行检测。
 
 
+### Window Coordinates and Screen Coordinates(窗口坐标和屏幕坐标)
+
+设备屏幕是没有 frame 的，但是有 `bounds` 也就是 `UIScreen.main.bounds` 。 Main window 也没有 superview，不过其 `frame` 被设置为屏幕的 `bounds`. 前面将window的时候有说过。
+
+大多数情况下，window是充满整个屏幕的，所以大多数情况下window的坐标和screen的坐标是一样的。
+
+现在的 iOS 中坐标系和手机是否选择是有关的，有如下两个属性：（在实际开发中基本不会碰到）
+
+- UIScreen 的 `coordinateSpace` 属性
+    + 这个坐标空间会旋转，就是高和宽在设备旋转时会呼唤，(0.0, 0.0) 是这个 app 本身的左上方
+
+- UIScreen 的 `fixedCoordinateSpace` 属性
+    + 这个坐标空间不会变化，就是物理上的左上角，从用户来看，这里的 (0.0, 0.0) 可能是 app 本身的任何一个角
+
+可以用下面的方法来对不同坐标空间进行转换：
+
+- `convertPoint:fromCoordinateSpace:`, `convertPoint:toCoordinateSpace:`
+- `convertRect:fromCoordinateSpace:`, `convertRect:toCoordinateSpace:`
+
+假设界面中有一个 UIView v，我们想知道它的实际设备坐标，可以用下面的代码：
+
+```swift
+let r = v.superview?.convert(v.frame, to: UIScreen.main.fixedCoordinateSpace)
+```
+
+但实际上你需要这种信息的机会非常少(反正我是没遇到过需要使用的)，或者其实几乎都不用担心 window 坐标，因为所有的可见操作都会在 root view contoller 的 main view 中进行，它的 bounds 是会自动调整的。
+
+### Transform ( 变换 )
+
+一个 view 的 transform 属性改变这个 view 是如何被绘制的，实际上就是一个 CGAffineTransform类的 3x3 矩阵（线性代数中的概念）。所有的变换都是以这个 view 的 center 做基准的。
+
+以下为view的平移旋转缩放
+
+```swift
+v.transform = CGAffineTransform
+      .identity
+      .rotated(by: 10 * CGFloat(Double.pi/180))
+      .translatedBy(x: 10, y: 0)
+      .scaledBy(x: 1.1, y: 1.1)
+```
+
+### Trait Collections and Size Classes
+
+界面上的每个 view(或者ViewController) 都有一个 `traitCollection` 属性 , 值是一个 UITraitCollection，包含下面四个属性：
+
+- `displayScale` 由当前屏幕决定的缩放尺寸，1 4以前的机型 基本没有了应该 2 、（4，5，6 3） 3、 (iPhone 6 plus/6s Plus) 。（和UIScreen的scale值是一样的）
+- `userInterfaceIdiom` 一个 `UserIterfaceIdiom` 值 ，可能是 `.phone` 或 `.pad` ，来标志不同的设备，默认来说和 UIDevice 的 `userInterfaceIdiom` 属性一致
+- `horizontalSizeClass`, `verticalSizeClass`，是 `UIUserInterfaceSizeClass` 值，可能是 `.regular` 或 `.compact`
+    - 水平和竖直都是 .regular -> iPad
+    - 水平是 .compact 竖直是 .regular -> iPhone 在垂直方向，或者 iPad 的分屏应用
+    - 水平和竖直都是 .compact -> iPhone 在水平方向(iPhone 6/6s plus除外)
+    - 水平是 .regular 竖直是 .compact -> iPhone 6/6s Plus 在水平方向
 
 
+### Layout
+
+superview 移动的时候 subview 就会移动。subview 大小和位置 会随着 superview改变，这就是layout。
+
+一些superview动态改变的例子： 
+
+- 屏幕旋转的时候，左上角会发生变化，长宽也要对调
+- 我们的app需要等比例匹配不同的设备尺寸
+- universal app需要运行在iPad和iPhone上，所以自己需要知道自己运行的环境来适应不同的屏幕
+- 从xib初始化的view，需要resize去适应所在的view
+- view需要适应别的view的变化对自己的影响，比如navagationBar隐藏和显示
+
+在以上的任何情况下其他view可能需要Layout，还有一些其他情况
+
+Layout 有三种主要的执行方式
+
+- 手动 `layout:superview` 在被更改尺寸会发送 `layoutSubviews` 消息，如果你新建自己的子类并且重写 `layoutSubviews` 就可以手动进行更改，这很麻烦，但是可以做任何你想做的事情
+- Autoresizing： iOS 6 之前的方式，主要是通过自己的 `autoresizingMask` 属性来变化
+- Autolayout：根据 view 的 constraints(NSLayoutConstraint)来进行变化，是很强大的功能，不用写代码就可以进行复杂的定制
+
+### Autoresizing
+
+Autoresizing 是一种自动拉伸和固定大小的一种概念，view有一个 `autoresizingMask` 属性 ，这个属性是一个 `UIViewAutoresizing` 的值 。默认是 `.none` 。下面举例来看看它的用法：
 
 
+```swift
+let mainview = self.view
+let v1 = UIView(frame:CGRectMake(100, 111, 132, 194))
+v1.backgroundColor = UIColor(red: 1, green: 0.4, blue: 1, alpha: 1)
+let v2 = UIView(frame:CGRectMake(0, 0, 132, 10))
+v2.backgroundColor = UIColor(red: 0.5, green: 1, blue: 0, alpha: 1)
+let v3 = UIView(frame:CGRectMake(v1.bounds.width-20, v1.bounds.height-20, 20, 20))
+v3.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
+mainview.addSubview(v1)
+v1.addSubview(v2)
+v1.addSubview(v3)
+```
 
 
+如果我加上一句代码，改变了v1的宽度呢？
 
+```swift
+v1.bounds.size.width += 40
+```
 
+这时候就可以利用autoresizingMask属性来指定v2的宽度可伸缩。
 
+```
+v2.autoresizingMask = .flexibleWidth
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+感兴趣的同学可以研究下，其实这些已经不是那么常用了，我们有更强大的 `AutoLayout` 了，基本不需要它了。
 
 
 

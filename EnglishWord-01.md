@@ -16,4 +16,13 @@
 - mutate 变异
 - partition 划分
 - canonical 典范
+- rately 很少
+- respective 各自
+- mechanism 机制 
+- whereby 因此 
+- individual 个人，个体
+- notation 符号
+- trivial 不重要的
+- vanish 消失 
+- literal 文字
 - 
