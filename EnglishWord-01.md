@@ -11,4 +11,9 @@
 - proposal 提案
 - observable 可观察的
 - conformance 一致性
+- simplification 简单化
+- intuitive 直观的 
+- mutate 变异
+- partition 划分
+- canonical 典范
 - 
