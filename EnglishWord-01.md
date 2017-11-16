@@ -1,0 +1,14 @@
+- restriction 限制
+- revised 修订
+- Nevertheless 虽然
+- significant 重大
+- Sibling 兄弟
+- ceases 停止
+- compensate 补偿
+- tricky 狡猾，棘手
+- imply 暗示
+- omit 忽略
+- proposal 提案
+- observable 可观察的
+- conformance 一致性
+- 

@@ -12,7 +12,7 @@ window 一般是view层级最底层的视图，一般是一个`UIWindow`（`UIVi
 > 如果你的 App 可以在额外的饿屏幕上展示view，你也可以创建另一个 `UIWindow` 来包含这些views.暂时不在讨论范围内。 
 
 创建`UIWindow`
-iOS 9 以前,必须制定frame
+iOS 9 以前,必须指定frame
 
 ```swift
 let w = UIWindow(frame: UIScreen.main.bounds)
