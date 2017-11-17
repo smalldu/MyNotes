@@ -20,10 +20,11 @@ class MyView: UIView{
 
 class MyViewController : UIViewController {
   
-  let guide = UILayoutGuide()
   
   
   override func loadView() {
+    
+    let guide = UILayoutGuide()
     let view = UIView()
     view.backgroundColor = .white
     
@@ -52,7 +53,21 @@ class MyViewController : UIViewController {
       v1.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       v1.trailingAnchor.constraint(equalTo: view.trailingAnchor)
       ])
+//    v1.contentCompressionResistancePriority(for: .vertical)
+//    v1.setContentCompressionResistancePriority(.init(1000), for: .vertical)
+//    v1.contentHuggingPriority(for: .vertical)
+//    v1.setContentHuggingPriority(.init(1000), for: .vertical)
     // intrinsic content size 系统自建的这些约束都是有非常低的优先级。除非我们没有其他约束和他冲突，他们才会起作用。
+    
+//    let stackview1 = UIStackView(arrangedSubviews: <#T##[UIView]#>)
+//    stackview1.layoutGuides
+//    stackview1.isLayoutMarginsRelativeArrangement
+//    stackview1.arrangedSubviews
+//stackview1.addArrangedSubview(<#T##view: UIView##UIView#>)
+//    stackview1.insertArrangedSubview(<#T##view: UIView##UIView#>, at: <#T##Int#>)
+//    stackview1.removeArrangedSubview(<#T##view: UIView##UIView#>)
+//    stackview1.axis = .horizontal
+//    stackview1.distribution
     self.view = view
   }
   

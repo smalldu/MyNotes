@@ -10,24 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
   
-  let view1 = UIView()
+  @IBOutlet weak var tableView: UITableView!
   override func viewDidLoad() {
     super.viewDidLoad()
-//    view.isHidden
-//    view.isOpaque
-//    let btn = UIButton()
-//    btn.isOpaque
-    
-    view1.frame = CGRect(x: 20, y: 40, width: 100, height: 100)
-    view1.backgroundColor = UIColor.blue
-    view1.isOpaque = false
-    view1.alpha = 0.3
-    view.addSubview(view1)
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.rowHeight = 160
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    print(view1.isOpaque)
-  }
 }
 
+
+extension ViewController: UITableViewDelegate,UITableViewDataSource{
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 2
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: ImageViewCell.reuseID, for: indexPath) as! ImageViewCell
+    return cell
+  }
+}

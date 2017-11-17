@@ -43,7 +43,29 @@
 - shrink 收缩、缩小
 - adjacent 邻、邻近的
 - afresh 重新
-
+- vast 广大 
+- remarkably 异常、不平常
+- a subset of 一个子集
+- interpretation 解释 
+- instructions 说明 
+- involved 参与
+- illustrate 说明、演示、图解说明
+- Internationalization 国际化 
+- participate 参加 
+- reversal 翻转
+- mimic 模仿者 
+- endowed 天赋 
+- semantic 语义 
+- simultaneously 同时 
+- neglect 忽略 
+- manual 手册、手工 
+- trait 特征 
+- consolidate 巩固
+- impact 碰撞 
+- Conversely 反过来 
+- substitute 替代 
+- frequently 经常 
+- 
 
 
 

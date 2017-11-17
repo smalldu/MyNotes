@@ -314,9 +314,129 @@ let c = NSLayoutConstraint(item: v,
 let c = v1.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor)
 ```
 
+有时候我们在布局的时候想放一个空的view在那里，什么都不干，只是占个位置，让其他视图可以基于它来布局，如果使用`UIView`我们就需要设置为 hidden , 但是系统还是会draw一个hidde的view。更好的选择是 `UILayoutGuide` 
 
 
+看个例子 :
+```swift
+let guide = UILayoutGuide()
+let view = UIView()
+view.backgroundColor = .white
 
+let v1 = UIView()
+v1.backgroundColor = UIColor.gray
+view.addSubview(v1)
+v1.addLayoutGuide(guide)
+
+let v2 = UIView()
+v2.backgroundColor = UIColor.red
+v1.addSubview(v2)
+v1.translatesAutoresizingMaskIntoConstraints = false
+v2.translatesAutoresizingMaskIntoConstraints = false
+
+NSLayoutConstraint.activate([
+  guide.leadingAnchor.constraint(equalTo: v1.leadingAnchor) ,
+  guide.trailingAnchor.constraint(equalTo: v1.trailingAnchor) ,
+  guide.bottomAnchor.constraint(equalTo: v1.bottomAnchor) ,
+  guide.heightAnchor.constraint(equalToConstant: 20) ,
+  v2.bottomAnchor.constraint(equalTo: guide.topAnchor) ,
+  v2.leadingAnchor.constraint(equalTo: v1.leadingAnchor) ,
+  v2.trailingAnchor.constraint(equalTo: v1.trailingAnchor) ,
+  v2.topAnchor.constraint(equalTo: v1.topAnchor),
+  v2.heightAnchor.constraint(equalToConstant: 49),
+  v1.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+  v1.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+  v1.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+  ])
+```
+
+示例中我们用layoutguide 在底部占了20pt的高度，v2基于guide布局。
+
+![示例](http://oyl1dq3ij.bkt.clouddn.com/1510922148535.jpg)
+
+Intrinsic content size and alignment rects (内建大小和对其方式)
+
+一些iOS内置的控件本身有内建大小（一个方向或者两个方向）。
+
+- `UIButton` ， 默认有个高度，宽度依赖于它的title
+- `UIImageView` , 默认会适应它image的大小
+- `UILabel` ， 如果宽度固定，高度可以显示多行，高度自己根据文字适应
+
+内建size会隐式产生约束。这个约束是一个低优先级的约束。如果没有别的相关约束阻止它，才会执行。
+
+下面看两个view的方法：
+
+- `contentHuggingPriorityForAxis:`
+阻止它自己在某个方向变大，比如有两个label在同一行紧挨着。那么两个文字都过长的时候会显示这个优先级.一般默认值是250
+
+```swift
+v1.contentHuggingPriority(for: .vertical)
+v1.setContentHuggingPriority(.init(1000), for: .vertical)
+```
+第一个是获取值，第二个是设置。第二个参数是方向。（水平/垂直）
+
+- `contentCompressionResistancePriorityForAxis:`
+
+阻止变小，默认值750.跟上面那个相反，用法一样
+
+```swift
+v1.contentCompressionResistancePriority(for: .vertical)
+v1.setContentCompressionResistancePriority(.init(1000), for: .vertical)
+```
+
+### Stack views 
+
+Stackview 的任务是为它的subviews生成约束，管理这些subviews，它使那些水平或者垂直排列的views之间的布局非常简单。
+
+使用stack view 非常简单，首先提供准备好的subviews，可以调用它的初始化方法 `init(arranged- Subviews:)` 将这些views 编程 stack view 的只读属性 `arrangedSubviews` , 我们也可以使用它的一些方法来管理这些subviews 
+
+- `addArrangedSubview:` 
+- `insertArrangedSubview:atIndex:` 
+- `removeArrangedSubview:` 
+
+这些方法名字都很明显的表示了它的用法。。
+
+
+subviews 的顺序将会决定他们在屏幕上显示的顺序。
+
+- 设置方向 `axis`
+
+```swift
+stackview1.axis = .horizontal // .vertical
+```
+- `distribution` subviews在`axis`上怎样的方式布局 
+    + .fill
+    + .fillEqually
+    + .fillProportionally
+    + .equalSpacing
+    + .equalCentering
+ 
+- `alignment`  这些subviews怎么摆放、基于其他views
+    + fill
+    + leading
+    + center
+    + trailing
+    + firstBaseline (when .horizontal)
+    + lastBaseline (when .horizontal)
+
+- `isLayoutMarginsRelativeArrangement` 如果是true , stack view 内部的 `layoutMargins` 参与到 subviews 的布局，如果是false 则使用stack view的边界
+ 
+我们并不需要给它的subviews 去设置约束，完全交给stack view去做。我们只需要设置 stack view的约束即可。
+
+stack view另一个很厉害的特性就是，它可以智能的改变它的布局，只有我们把它某个subview的 `isHidden`设置为false ， 其他subviews会自动适应的非常完美,而且这些都是可以实时改变，也可以加动画。
+
+
+### 约束中的错误 、 冲突 
+
+手动创建约束很容易出现纰漏。
+
+一般情况分两种，一种是不能满足某个view的布局，一种是几个约束之间存在冲突。
+
+一般情况这些约束冲突都会在控制台打印，先看打印信息确定问题，如果还不能确定，使用View debug 可以直观的选择某个view查看它实时的约束。
+
+### 在xib中布局
+
+这个很重要，也是我一般用的最多的方式，网上有很多相关教程。略过了~ 
 
 
 

@@ -14,6 +14,9 @@
 		20357A201FBC21F800DB6170 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20357A1E1FBC21F800DB6170 /* LaunchScreen.storyboard */; };
 		20357A2B1FBC21F800DB6170 /* views_demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20357A2A1FBC21F800DB6170 /* views_demoTests.swift */; };
 		20357A361FBC21F900DB6170 /* views_demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20357A351FBC21F900DB6170 /* views_demoUITests.swift */; };
+		C43DDA321FBF2B3C00D784E0 /* ImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DDA311FBF2B3C00D784E0 /* ImageViewCell.swift */; };
+		C43DDA341FBF325500D784E0 /* ResizableImagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DDA331FBF325500D784E0 /* ResizableImagesController.swift */; };
+		C43DDA361FBF3DAD00D784E0 /* MyDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43DDA351FBF3DAD00D784E0 /* MyDrawView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		20357A311FBC21F900DB6170 /* views-demoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "views-demoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20357A351FBC21F900DB6170 /* views_demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = views_demoUITests.swift; sourceTree = "<group>"; };
 		20357A371FBC21F900DB6170 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C43DDA311FBF2B3C00D784E0 /* ImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
+		C43DDA331FBF325500D784E0 /* ResizableImagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableImagesController.swift; sourceTree = "<group>"; };
+		C43DDA351FBF3DAD00D784E0 /* MyDrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrawView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,9 @@
 				20357A1C1FBC21F800DB6170 /* Assets.xcassets */,
 				20357A1E1FBC21F800DB6170 /* LaunchScreen.storyboard */,
 				20357A211FBC21F800DB6170 /* Info.plist */,
+				C43DDA311FBF2B3C00D784E0 /* ImageViewCell.swift */,
+				C43DDA331FBF325500D784E0 /* ResizableImagesController.swift */,
+				C43DDA351FBF3DAD00D784E0 /* MyDrawView.swift */,
 			);
 			path = "views-demo";
 			sourceTree = "<group>";
@@ -260,7 +269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				20357A181FBC21F800DB6170 /* ViewController.swift in Sources */,
+				C43DDA341FBF325500D784E0 /* ResizableImagesController.swift in Sources */,
+				C43DDA321FBF2B3C00D784E0 /* ImageViewCell.swift in Sources */,
 				20357A161FBC21F800DB6170 /* AppDelegate.swift in Sources */,
+				C43DDA361FBF3DAD00D784E0 /* MyDrawView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
