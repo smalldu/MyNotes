@@ -54,10 +54,9 @@ resize一个image 一般调用 `resizableImageWithCapInsets:resizingMode: ` 方�
 - .stretch 
     拉伸: 变化区域的内部被拉伸一次以填充;每一条边是由非变化区域的相应边缘矩形组成的。相对于变化区域的四个角落的绘制不变。
     
-    http://www.jianshu.com/p/e4e179cea022
-
+    [programming iOS - view drawing (一)](http://www.jianshu.com/p/e4e179cea022)
+    [programming ios - view drawing(二)](http://www.jianshu.com/p/fe0b03063ac2)
     http://www.jianshu.com/p/a577023677c1
-
 
 
 一个常见的延伸策略是让几乎一半的原始图像作为capinset，只留下中心的一两个像素来填充空白区域：
