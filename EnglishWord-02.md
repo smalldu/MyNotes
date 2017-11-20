@@ -14,4 +14,18 @@
 - undergoes 经历 
 - periodic 定期 
 - thank heavens 谢天谢地 
+- desired 期望
+- artificial 人造 
+- curve 曲线
+- inability 无力、无能 
+- outmoded 陈旧的
+- subsequently 后来 
+- oscillate 摆动、摇摆
+- emphasizes 强调 
+- conventional 常规、惯例
+- Implicit 含蓄、盲从的
+- arbitrary 随意 
+- tangent 切线 
+- embody 容易 
+- conscious 意识、察觉 
 - 
