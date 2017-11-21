@@ -16,6 +16,7 @@
 		20C3F7281FC2A6080062AB0C /* Animations_01UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F7271FC2A6080062AB0C /* Animations_01UITests.swift */; };
 		20C3F7371FC2B2AB0062AB0C /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F7361FC2B2AB0062AB0C /* MyView.swift */; };
 		20C3F73A1FC2C1860062AB0C /* LayerAnimationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F7391FC2C1860062AB0C /* LayerAnimationsController.swift */; };
+		20C3F73C1FC403780062AB0C /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C3F73B1FC403780062AB0C /* TextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		20C3F7291FC2A6080062AB0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20C3F7361FC2B2AB0062AB0C /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
 		20C3F7391FC2C1860062AB0C /* LayerAnimationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerAnimationsController.swift; sourceTree = "<group>"; };
+		20C3F73B1FC403780062AB0C /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				20C3F7391FC2C1860062AB0C /* LayerAnimationsController.swift */,
+				20C3F73B1FC403780062AB0C /* TextField.swift */,
 			);
 			path = "CALayer-animations";
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				20C3F7371FC2B2AB0062AB0C /* MyView.swift in Sources */,
 				20C3F70A1FC2A6080062AB0C /* ViewController.swift in Sources */,
 				20C3F73A1FC2C1860062AB0C /* LayerAnimationsController.swift in Sources */,
+				20C3F73C1FC403780062AB0C /* TextField.swift in Sources */,
 				20C3F7081FC2A6080062AB0C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

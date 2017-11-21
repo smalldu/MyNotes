@@ -106,14 +106,26 @@
                                     <constraint firstAttribute="width" constant="80" id="xnD-cE-trZ"/>
                                 </constraints>
                             </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="user name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RWf-PH-5VA" customClass="TextField" customModule="Animations_01" customModuleProvider="target">
+                                <rect key="frame" x="15" y="124" width="345" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="xVf-a9-QSx"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="RWf-PH-5VA" firstAttribute="leading" secondItem="UgX-yZ-enP" secondAttribute="leading" constant="15" id="0n4-QS-A4P"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="akB-eA-WCX" secondAttribute="trailing" constant="20" symbolic="YES" id="225-Ik-G19"/>
                             <constraint firstItem="akB-eA-WCX" firstAttribute="top" secondItem="UgX-yZ-enP" secondAttribute="top" constant="10" id="9uJ-Qh-dFm"/>
                             <constraint firstItem="akB-eA-WCX" firstAttribute="leading" secondItem="UgX-yZ-enP" secondAttribute="leading" constant="15" id="Cfv-z6-xnD"/>
                             <constraint firstItem="UgX-yZ-enP" firstAttribute="trailing" secondItem="cRE-FW-qhw" secondAttribute="trailing" constant="120" id="DZK-n8-gal"/>
+                            <constraint firstItem="RWf-PH-5VA" firstAttribute="top" secondItem="akB-eA-WCX" secondAttribute="bottom" constant="20" id="F2C-Ph-Nsh"/>
                             <constraint firstItem="cRE-FW-qhw" firstAttribute="centerY" secondItem="akB-eA-WCX" secondAttribute="centerY" id="HM4-EN-RID"/>
+                            <constraint firstItem="UgX-yZ-enP" firstAttribute="trailing" secondItem="RWf-PH-5VA" secondAttribute="trailing" constant="15" id="m07-Ox-ubu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UgX-yZ-enP"/>
                     </view>
